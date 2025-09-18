@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⏰ Умные Часы - Время, Дата, Секундомер</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Шапка -->
+        <header class="header">
+            <h1 class="title">⏰ Умные Часы</h1>
+            <p class="subtitle">Мониторинг времени в реальном режиме</p>
+        </header>
+
+        <!-- Основной контент -->
+        <main class="main-content">
+            <!-- Блок отображения времени -->
+            <div class="time-display">
+                <div class="time-section">
+                    <div class="time-card" id="time-card">
+                        <div class="icon">🕒</div>
+                        <div class="value" id="current-time">--:--:--</div>
+                        <div class="label">ТЕКУЩЕЕ ВРЕМЯ</div>
+                    </div>
+                </div>
+
+                <div class="date-section">
+                    <div class="date-card" id="date-card">
+                        <div class="icon">📅</div>
+                        <div class="value" id="current-date">--.--.----</div>
+                        <div class="label">СЕГОДНЯШНЯЯ ДАТА</div>
+                    </div>
+                </div>
+
+                <div class="seconds-section">
+                    <div class="seconds-card" id="seconds-card">
+                        <div class="icon">⏱️</div>
+                        <div class="value" id="seconds-counter">0</div>
+                        <div class="label">СЕКУНД ПРОШЛО</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Панель управления -->
+            <div class="control-panel">
+                <div class="control-group">
+                    <h3>⚙️ Управление секундомером</h3>
+                    <div class="buttons">
+                        <button class="btn btn-start" onclick="startStopwatch()">
+                            <i class="fas fa-play"></i> Старт
+                        </button>
+                        <button class="btn btn-pause" onclick="pauseStopwatch()">
+                            <i class="fas fa-pause"></i> Пауза
+                        </button>
+                        <button class="btn btn-reset" onclick="resetStopwatch()">
+                            <i class="fas fa-redo"></i> Сброс
+                        </button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <h3>🎯 Настройки отображения</h3>
+                    <div class="toggle-buttons">
+                        <button class="toggle-btn active" onclick="toggleDisplay('all')">
+                            <i class="fas fa-eye"></i> Все
+                        </button>
+                        <button class="toggle-btn" onclick="toggleDisplay('time')">
+                            <i class="fas fa-clock"></i> Только время
+                        </button>
+                        <button class="toggle-btn" onclick="toggleDisplay('date')">
+                            <i class="fas fa-calendar"></i> Только дата
+                        </button>
+                        <button class="toggle-btn" onclick="toggleDisplay('seconds')">
+                            <i class="fas fa-stopwatch"></i> Только секунды
+                        </button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <h3>⚡ Настройка интервала</h3>
+                    <div class="interval-control">
+                        <label for="interval-slider">Обновление каждые: 
+                            <span id="interval-value">1.0</span> сек
+                        </label>
+                        <input type="range" id="interval-slider" min="0.1" max="5" step="0.1" value="1.0" 
+                               oninput="updateInterval(this.value)">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Пользовательские настройки -->
+            <div class="custom-settings">
+                <h3>🔧 Пользовательские настройки</h3>
+                <div class="settings-grid">
+                    <div class="setting-item">
+                        <label for="custom-time">Установить время:</label>
+                        <input type="time" id="custom-time" class="time-input">
+                        <button class="btn btn-small" onclick="setCustomTime()">
+                            <i class="fas fa-check"></i> Применить
+                        </button>
+                    </div>
+
+                    <div class="setting-item">
+                        <label for="custom-date">Установить дату:</label>
+                        <input type="date" id="custom-date" class="date-input">
+                        <button class="btn btn-small" onclick="setCustomDate()">
+                            <i class="fas fa-check"></i> Применить
+                        </button>
+                    </div>
+
+                    <div class="setting-item">
+                        <label for="custom-seconds">Установить секунды:</label>
+                        <input type="number" id="custom-seconds" min="0" value="0" class="seconds-input">
+                        <button class="btn btn-small" onclick="setCustomSeconds()">
+                            <i class="fas fa-check"></i> Применить
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Статус бар -->
+        <footer class="footer">
+            <div class="status-bar">
+                <span id="status">🟢 Онлайн | Обновлено: <span id="last-update">--:--:--</span></span>
+                <span>⏰ Точность: ±10мс | 🖥️ User-Agent: <span id="user-agent"></span></span>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
